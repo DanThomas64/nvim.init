@@ -1,0 +1,24 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Vertical move down - cursor centered" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Vertical move up - cursor centered" })
+
+-- delete without yanking
+vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete without yanking NORMAL" })
+vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete without yanking VISUAL" })
+-- paste no yank
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking ALL" })
+-- Explorer
+vim.keymap.set("n", "<leader>h", ":Ex<CR>", { desc = "Opens file explorer" })
+-- Search results
+vim.keymap.set("n", "n", "nzzzv", { desc = "Search next result - cursor centered" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Search previous result - cursor centered" })
+-- replace word
+vim.keymap.set(
+  "n",
+  "<leader>r",
+  ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
+  { desc = "[r]eplace all instances of word under cursor" }
+)
