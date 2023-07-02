@@ -22,3 +22,5 @@ vim.keymap.set(
   ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
   { desc = "[r]eplace all instances of word under cursor" }
 )
+-- JJ ESC--
+vim.keymap.set("i", "jj", "<ESC>", { desc = "Add jj as alternative to ESC" })
