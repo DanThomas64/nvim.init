@@ -1,4 +1,5 @@
 return {
+  --[[
   {
     "neovim/nvim-lspconfig",
     opts = function()
@@ -7,8 +8,8 @@ return {
       if not configs.sqf_lsp then
         configs.sqf_lsp = {
           default_config = {
-            cmd = { "node", os.getenv("SQF_PATH"), "--stdio" },
-            filetypes = { "sqf" },
+            cmd = { "node", "E:/project/sqf/sqf-language-rework/.out/extension/server/src/server.js", "--stdio" },
+            filetypes = { "sqf", "sqc" },
             root_dir = function(fname)
               return require("lspconfig.util").find_git_ancestor(fname)
             end,
@@ -19,4 +20,5 @@ return {
       require("lspconfig").sqf_lsp.setup({})
     end,
   },
+  --]]
 }
