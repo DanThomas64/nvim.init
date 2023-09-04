@@ -2,6 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local Util = require("util")
+
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Vertical move down - cursor centered" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Vertical move up - cursor centered" })
 
@@ -42,3 +44,11 @@ vim.keymap.set("v", ">", ">gv")
 
 -- Open Lazy.nvim
 vim.keymap.set("n", "<leader>l", ":Lazy<CR>")
+
+-- lazygit
+vim.keymap.set("n", "<leader>gg", function()
+  Util.float_term({ "lazygit" }, { cwd = Util.get_root(), esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (root dir)" })
+vim.keymap.set("n", "<leader>gG", function()
+  Util.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (cwd)" })
