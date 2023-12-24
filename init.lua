@@ -73,6 +73,7 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
+
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -295,7 +296,7 @@ vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete without yanking VISUAL"
 -- paste no yank
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking ALL" })
 -- Explorer
-vim.keymap.set("n", "<leader>h", ":Ex<CR>", { desc = "Opens file explorer" })
+vim.keymap.set("n", "<leader>h", "<CMD>Oil<CR>", { desc = "Opens file explorer" })
 -- Search results
 vim.keymap.set("n", "n", "nzzzv", { desc = "Search next result - cursor centered" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Search previous result - cursor centered" })
