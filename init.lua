@@ -225,11 +225,11 @@ vim.o.number = true          -- Print line number
 vim.o.pumblend = 10          -- Popup blend
 vim.o.pumheight = 10         -- Maximum number of entries in a popup
 vim.o.relativenumber = true  -- Relative line numbers
-vim.o.scrolloff = 8          -- Lines of context
+vim.o.scrolloff = 25         -- Lines of context
 vim.o.shiftround = true      -- Round indent
 vim.o.shiftwidth = 4         -- Size of an indent
 vim.o.showmode = false       -- Dont show mode since we have a statusline
-vim.o.sidescrolloff = 8      -- Columns of context
+vim.o.sidescrolloff = 25     -- Columns of context
 vim.o.signcolumn = "yes"     -- Always show the signcolumn, otherwise it would shift the text each time
 vim.o.smartcase = true       -- Don't ignore case with capitals
 vim.o.smartindent = true     -- Insert indents automatically
@@ -406,10 +406,13 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').find_files, { desc = 'Find in files' })
-vim.keymap.set('n', '<leader>f', require('telescope.builtin').live_grep, { desc = 'Find in files' })
+vim.keymap.set('n', '<leader>f', require('telescope.builtin').live_grep, { desc = 'Live Grep in Workspace' })
+vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = 'Find string in files' })
+vim.keymap.set('n', '<leader>fm', require('telescope.builtin').marks, { desc = 'Find in the marks' })
+vim.keymap.set('n', '<leader>fk', require('telescope.builtin').keymaps, { desc = 'Find in Keymaps' })
 
--- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
+-- [[ Configure LSP ]]
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
