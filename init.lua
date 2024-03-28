@@ -201,9 +201,6 @@ require('lazy').setup({
 -- Add any additional options here
 
 -- This file is automatically loaded by plugins.core
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 vim.o.autowrite = true          -- Enable auto write
 vim.o.backup = false
 vim.o.clipboard = "unnamedplus" -- Sync with system clipboard
@@ -616,7 +613,6 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'copilot' },
   },
   formatting = {
     format = lspkind.cmp_format({
