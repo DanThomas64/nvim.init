@@ -315,6 +315,7 @@ vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete without yanking VISUAL"
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking ALL" })
 -- Explorer
 vim.keymap.set("n", "<leader>h", "<CMD>Oil<CR>", { desc = "Opens file explorer" })
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Opens file explorer" })
 -- Search results
 vim.keymap.set("n", "n", "nzzzv", { desc = "Search next result - cursor centered" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Search previous result - cursor centered" })
