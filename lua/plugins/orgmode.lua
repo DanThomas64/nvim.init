@@ -1,117 +1,121 @@
 return {
-  {
-    'nvim-orgmode/orgmode',
-    event = 'VeryLazy',
-    ft = { 'org' },
-    dependencies = { 'akinsho/org-bullets.nvim',
-      'andreadev-it/orgmode-multi-key',
-      'massix/org-checkbox.nvim',
-    },
-    config = function()
-      require('org-bullets').setup()
-      require('orgcheckbox').setup({ lhs = '<leader>oT' })
-      require('orgmode-multi-key').setup({ key = '<leader>u' })
-      -- Setup orgmode
-      require('orgmode').setup({
-        org_agenda_files = '~/notes/**/*',
-        org_default_notes_file = '~/notes/refile.org',
-
-        org_startup_folded = 'inherit',
-
-        mappings = {
-          global = {
-            org_agenda = '<leader>oa',
-            org_capture = '<leader>oc'
-          },
+    {
+        'nvim-orgmode/orgmode',
+        event = 'VeryLazy',
+        ft = { 'org' },
+        dependencies = { 'akinsho/org-bullets.nvim',
+            'andreadev-it/orgmode-multi-key',
+            'massix/org-checkbox.nvim',
         },
+        config = function()
+            require('orgcheckbox').setup({ lhs = '<leader>oT' })
+            require('orgmode-multi-key').setup({ key = '<leader><CR>' })
+            -- Setup orgmode
+            require('orgmode').setup({
+                -- Locations setups
+                org_agenda_files = '~/notes/**/*',
+                org_default_notes_file = '~/notes/⁉️ To Organize.org',
+                org_archive_location = '~/notes/archive/%s_archive::',
+                -- Keywords to keep consistent with orgzly
+                org_todo_keywords = { 'TODO(t)', 'NEXT(n)', 'ENTER(e)', 'QUESTION(q)', '|', 'ANSWERED(y)', 'DONE(d)' },
+                -- Indentation settings
+                org_adapt_indentation = false,
+                -- Folding settings
+                org_startup_folded = 'inherit',
+                -- New blank line before new entry
+                org_blank_before_new_entry = { heading = true, plain_list_item = false },
+                -- custom mappings
+                mappings = {
+                    global = {
+                        org_agenda = '<leader>oa',
+                        org_capture = '<leader>oc',
+                    },
+                    org = {
+                        org_toggle_heading = '<leader>oh',
+                    }
+                },
 
-        org_capture_templates = {
-          n = {
-            description = 'quick (n)ote',
-            template = '\n*** %<%Y-%m-%d> %<%A>\n**** %U\n\n%?\n',
-            target = '~/notes/q_notes/q_%^{topic|%<%Y_%m_%d>}.org',
-          },
-          j = '(j)ournal',
-          je = {
-            description = '(e)vent',
-            template = '\n\n** %<%H:%M>: %^{Relates to: |%a}\n%?\n',
-            target = '~/notes/journal/%<%Y-%m>.org'
-          },
-          jy = {
-            description = '(y)ank',
-            template = '\n** %^{What is this: |%a} :snippet:\n%U\n\n%?\n\n```%^{source type: |}\n%x\n```',
-            target = '~/notes/journal/%<%Y-%m>.org'
-          },
-          w = '(w)ork',
-          ws = {
-            description = 'day (s)tart',
-            template =
-            '** start\n\t:PROPERTIES:\n\t:CREATED: %U\n\t:location: %^{Where are we working today: |WFH}\n\t:END:\n\n*** TODO %?\n',
-            target = '~/notes/💼 Work.org',
-            datetree = true,
-          },
-          we = {
-            description = 'day (e)nd',
-            '** end\n%U\n\t:PROPERTIES:\n\t:hours: %^{Hours worked: |8}\n\t:END:\n ',
-            target = '~/notes/💼 Work.org',
-            datetree = true
-          },
-          wl = {
-            description = '(l)og',
-            template = '**** %^{Relates to: |%a} :log:\n%U\n\t:PROPERTIES:\n\t:project: %^{Project: |NA}\n\t:END:\n%?\n',
-            target = '~/notes/💼 Work.org',
-            datetree = true,
-          },
-          wn = {
-            description = 'work (n)ote',
-            template = '**** %^{Relates to: |%a} :note:\n%U\n\n%?\n',
-            target = '~/notes/💼 Work.org',
-            datetree = true,
-          },
-          wy = {
-            description = '(y)ank',
-            template = '\n** %^{What is this: |%a} :snippet:\n%U\n\n%?\n\n```%^{source type: |}\n%x\n```',
-            target = '~/notes/💼 Work.org',
-            datetree = true,
-          },
-          wp = '(p)roject',
-          wpt = {
-            description = 'project (t)ask',
-            template =
-            '** start\n\t:PROPERTIES:\n\t:CREATED: %U\n\t:location: %^{Where are we working today: |WFH}\n\t:END:\n\n*** TODO %?\n',
-            target = '~/notes/💼 Work.org',
-            datetree = true,
-          },
-        },
-        -- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
-        -- add ~org~ to ignore_install
-        -- require('nvim-treesitter.configs').setup({
-        --   ensure_installed = 'all',
-        --   ignore_install = { 'org' },
-        -- })
-      })
-    end,
-  },
-  {
-    "nvim-orgmode/telescope-orgmode.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-orgmode/orgmode",
-      "nvim-telescope/telescope.nvim",
+                org_capture_templates = {
+                    n = '(n)note',
+                    nq = {
+                        description = '(q)uick',
+                        template = '**** %^{Relates to: |%a} :note:\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n%?\n\n',
+                        target = '~/notes/⁉️ To Organize.org',
+                        properties = { empty_lines = { before = 1 }, { after = 0 } },
+                    },
+                    nf = {
+                        description = 'in (f)ile',
+                        template = '*** %^{Relates to: |%a} :note:\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n%?\n\n',
+                        target = '%F',
+                        properties = { empty_lines = { before = 1 }, { after = 0 } },
+                        headline = 'Notes',
+                    },
+                    j = '(j)ournal',
+                    je = {
+                        description = '(e)vent',
+                        template = '**** [%^{Event description: |log}]\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n%?\n\n',
+                        target = '~/notes/📓 %<%Y-%m>.org',
+                        properties = { empty_lines = { before = 1 }, { after = 0 } },
+                    },
+                    jy = {
+                        description = '(y)ank',
+                        template =
+                        '\n** %^{What is this: |%a}\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n%?\n\n```%^{source type: |}\n%x\n```\n\n',
+                        target = '~/notes/📓 %<%Y-%m>.org',
+                        properties = { empty_lines = { before = 1 }, { after = 0 } },
+                    },
+                    --
+                    -- Nothing below this line means shit for orgzly
+                    --
+                    w = '(w)ork',
+                    ws = {
+                        description = 'day (s)tart',
+                        template =
+                        '** START OF DAY\n:PROPERTIES:\n:CREATED: %U\n:location: %^{Where are we working today: |WFH}\n:END:\n\n*** TODO %?\n\n',
+                        target = '~/notes/💼 Work.org',
+                        datetree = true,
+                        properties = { empty_lines = { before = 1 }, { after = 0 } },
+                    },
+                    we = {
+                        description = 'day (e)nd',
+                        '** END OF DAY\n%U\n\n ',
+                        target = '~/notes/💼 Work.org',
+                        datetree = true,
+                        properties = { empty_lines = { before = 1 }, { after = 0 } },
+                    },
+                    wn = {
+                        description = 'work (n)ote',
+                        template = '**** %^{Relates to: |%a} :note:\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n%?\n\n',
+                        target = '~/notes/💼 Work.org',
+                        datetree = true,
+                        properties = { empty_lines = { before = 1 }, { after = 0 } },
+                    },
+                    wy = {
+                        description = '(y)ank',
+                        template = '\n** %^{What is this: |%a}\n%U\n\n%?\n\n```%^{source type: |}\n%x\n```\n\n',
+                        target = '~/notes/💼 Work.org',
+                        datetree = true,
+                        properties = { empty_lines = { before = 1 }, { after = 0 } },
+                    },
+                },
+            })
+        end,
     },
-    config = function()
-      require("telescope").load_extension("orgmode")
+    {
+        "nvim-orgmode/telescope-orgmode.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-orgmode/orgmode",
+            "nvim-telescope/telescope.nvim",
+        },
+        config = function()
+            require("telescope").load_extension("orgmode")
 
-      vim.keymap.set("n", "<leader>r", require("telescope").extensions.orgmode.refile_heading)
-      vim.keymap.set("n", "<leader>fh", require("telescope").extensions.orgmode.search_headings)
-      vim.keymap.set("n", "<leader>li", require("telescope").extensions.orgmode.insert_link)
-    end,
-  },
-  require 'cmp'.setup({
-    sources = {
-      { name = 'orgmode' }
-    }
-  }),
+            vim.keymap.set("n", "<leader>r", require("telescope").extensions.orgmode.refile_heading)
+            vim.keymap.set("n", "<leader>fh", require("telescope").extensions.orgmode.search_headings)
+            vim.keymap.set("n", "<leader>li", require("telescope").extensions.orgmode.insert_link)
+        end,
+    },
 }
 
 -- local M = {}
