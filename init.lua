@@ -260,6 +260,7 @@ vim.o.undolevels = 10000
 vim.o.wildmode = "longest:full,full" -- Command-line completion mode
 vim.o.winminwidth = 5                -- Minimum window width
 vim.o.wrap = false                   -- Disable line wrap
+vim.o.foldlevel = 3                  -- Fold level
 
 if vim.fn.has("nvim-0.9.0") == 1 then
   vim.o.splitkeep = "screen"
@@ -321,6 +322,7 @@ vim.keymap.set("n", "n", "nzzzv", { desc = "Search next result - cursor centered
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Search previous result - cursor centered" })
 -- JJ ESC--
 vim.keymap.set("i", "jj", "<ESC>", { desc = "Add jj as alternative to ESC" })
+vim.keymap.set("i", "<C-c>", "<ESC>", { desc = "Add Ctrl+c as alternative to ESC" })
 -- Move Lines
 vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
 vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
@@ -344,14 +346,18 @@ vim.keymap.set("n", "<leader>gG", function()
 end, { desc = "Lazygit (cwd)" })
 
 -- Touble
-vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
-vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
-vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
-vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
-vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
-vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
-
-
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end, { desc = "Toggle Trouble" })
+vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end,
+  { desc = "Trouble: [W]orkspace Diagnostics" })
+vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end,
+  { desc = "Trouble: [D]ocument Diagnostics" })
+vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end, { desc = "Trouble: [Q]uick Fix" })
+vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end,
+  { desc = "Trouble: [L]ocation List" })
+vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end,
+  { desc = "Trouble: [G]o to [R]eferences" })
+-- Follow link
+-- vim.api.nvim_set_keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], { desc = "Open link" })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
