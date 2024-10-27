@@ -3,7 +3,14 @@ return {
     'nvim-orgmode/orgmode',
     event = 'VeryLazy',
     ft = { 'org' },
+    dependencies = { 'akinsho/org-bullets.nvim',
+      'andreadev-it/orgmode-multi-key',
+      'massix/org-checkbox.nvim',
+    },
     config = function()
+      require('org-bullets').setup()
+      require('orgcheckbox').setup({ lhs = '<leader>oT' })
+      require('orgmode-multi-key').setup({ key = '<leader>u' })
       -- Setup orgmode
       require('orgmode').setup({
         org_agenda_files = '~/notes/**/*',
@@ -104,7 +111,7 @@ return {
     sources = {
       { name = 'orgmode' }
     }
-  })
+  }),
 }
 
 -- local M = {}
