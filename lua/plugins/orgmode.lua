@@ -37,11 +37,13 @@ return {
 
                 org_capture_templates = {
                     n = '(n)note',
-                    nq = {
+                    nn = {
                         description = '(q)uick',
                         template = '**** %^{Relates to: |%a} :note:\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n%?\n\n',
                         target = '~/notes/⁉️ To Organize.org',
                         properties = { empty_lines = { before = 1 }, { after = 0 } },
+                        headline = '📥 Inbox'
+
                     },
                     nf = {
                         description = 'in (f)ile',
