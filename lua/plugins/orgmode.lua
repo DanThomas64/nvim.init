@@ -39,25 +39,25 @@ return {
           ws = {
             description = 'day (s)tart',
             template =
-            '** start\n:PROPERTIES:\n:CREATED: %U\n:location: %^{Where are we working today: |WFH}\n:END:\n\n*** TODO %?\n',
+            '** start\n\t:PROPERTIES:\n\t:CREATED: %U\n\t:location: %^{Where are we working today: |WFH}\n\t:END:\n\n*** TODO %?\n',
             target = '~/notes/💼 Work.org',
             datetree = true,
           },
           we = {
             description = 'day (e)nd',
-            '** end\n%U\n:PROPERTIES:\n:hours: %^{Hours worked: |8}\n:END:\n ',
+            '** end\n%U\n\t:PROPERTIES:\n\t:hours: %^{Hours worked: |8}\n\t:END:\n ',
             target = '~/notes/💼 Work.org',
             datetree = true
           },
           wl = {
             description = '(l)og',
-            template = '**** %^{Relates to: |%a} :log:\n%U\n:PROPERTIES:\n:project: %^{Project: |NA}\n:END:\n%?\n',
+            template = '**** %^{Relates to: |%a} :log:\n%U\n\t:PROPERTIES:\n\t:project: %^{Project: |NA}\n\t:END:\n%?\n',
             target = '~/notes/💼 Work.org',
             datetree = true,
           },
           wn = {
             description = 'work (n)ote',
-            template = '**** %^{Relates to: |%a} :note:\n%U\n:PROPERTIES:\n:project: %^{Project: |NA}\n:END:\n%?\n',
+            template = '**** %^{Relates to: |%a} :note:\n%U\n\n%?\n',
             target = '~/notes/💼 Work.org',
             datetree = true,
           },
@@ -71,7 +71,7 @@ return {
           wpt = {
             description = 'project (t)ask',
             template =
-            '** start\n:PROPERTIES:\n:CREATED: %U\n:location: %^{Where are we working today: |WFH}\n:END:\n\n*** TODO %?\n',
+            '** start\n\t:PROPERTIES:\n\t:CREATED: %U\n\t:location: %^{Where are we working today: |WFH}\n\t:END:\n\n*** TODO %?\n',
             target = '~/notes/💼 Work.org',
             datetree = true,
           },
